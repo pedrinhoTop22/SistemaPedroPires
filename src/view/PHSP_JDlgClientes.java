@@ -387,21 +387,30 @@ public class PHSP_JDlgClientes extends javax.swing.JDialog {
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
-
-        int cod = Util.strToInt(jTxtCodigo.getText());
+   Util.habilitar(false, jTxtNome, jTxtCodigo, jFmtTelefone,jTxtEstado,jTxtCidade,jTxtGenero,jFmtCpf,jTxtEmail,jTxtEndereco,jFmtCep,
+           jFmtDataNascimento,jTxtPais,jPwdSenha,jTxtStatus,jFmtDataCadastro,jBtnIncluir,jBtnConfirmar,jBtnCancelar);
+        
+         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+         
+              Util.limpar(jTxtNome, jTxtCodigo, jFmtTelefone,jTxtEstado,jTxtCidade,jTxtGenero,jFmtCpf,jTxtEmail,jTxtEndereco,jFmtCep,
+                      jFmtDataNascimento,jTxtPais,jPwdSenha,jTxtStatus,jFmtDataCadastro,jBtnConfirmar,jBtnCancelar);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         // TODO add your handling code here:
         Util.habilitar(false, jTxtNome, jTxtCodigo, jFmtTelefone,jTxtEstado,jTxtCidade,jTxtGenero,jFmtCpf,jTxtEmail,jTxtEndereco,jFmtCep,
-                jFmtDataNascimento,jTxtPais,jPwdSenha,jTxtStatus,jFmtDataCadastro,jBtnIncluir,jBtnConfirmar,jBtnCancelar);
+           jFmtDataNascimento,jTxtPais,jPwdSenha,jTxtStatus,jFmtDataCadastro,jBtnIncluir,jBtnConfirmar,jBtnCancelar);
         
-        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+         
+              Util.limpar(jTxtNome, jTxtCodigo, jFmtTelefone,jTxtEstado,jTxtCidade,jTxtGenero,jFmtCpf,jTxtEmail,jTxtEndereco,jFmtCep,
+                      jFmtDataNascimento,jTxtPais,jPwdSenha,jTxtStatus,jFmtDataCadastro,jBtnConfirmar,jBtnCancelar);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here:
-       
+          PHSP_JDlgUsuariosPesquisar telaPesquisar = new PHSP_JDlgUsuariosPesquisar(null, true);
+        telaPesquisar.setVisible(true);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
@@ -422,8 +431,8 @@ public class PHSP_JDlgClientes extends javax.swing.JDialog {
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-        if (pergunta("Deseja excluir?")) {
-        JOptionPane.showMessageDialog(null, "excluído");} 
+         if (pergunta("Tem certeza que deseja excluir?")) {
+        JOptionPane.showMessageDialog(null, "Excluído");} 
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     /**

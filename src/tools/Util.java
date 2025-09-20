@@ -47,7 +47,7 @@ public static void mensagem(String cad){
     JOptionPane.showMessageDialog(null, cad);
 }
       public static boolean pergunta(String cad){
-    int resposta = JOptionPane.showConfirmDialog(null, cad, "Confirmação", JOptionPane.YES_NO_OPTION);
+    int resposta = JOptionPane.showConfirmDialog(null, cad, "Tem Certeza?", JOptionPane.YES_NO_OPTION);
     return resposta == JOptionPane.YES_OPTION;
 }
 public static int strToInt(String num){
