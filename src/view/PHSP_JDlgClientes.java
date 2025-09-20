@@ -393,7 +393,7 @@ public class PHSP_JDlgClientes extends javax.swing.JDialog {
          Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
          
               Util.limpar(jTxtNome, jTxtCodigo, jFmtTelefone,jTxtEstado,jTxtCidade,jTxtGenero,jFmtCpf,jTxtEmail,jTxtEndereco,jFmtCep,
-                      jFmtDataNascimento,jTxtPais,jPwdSenha,jTxtStatus,jFmtDataCadastro,jBtnConfirmar,jBtnCancelar);
+                      jFmtDataNascimento,jTxtPais,jPwdSenha,jTxtStatus,jFmtDataCadastro);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
@@ -404,7 +404,7 @@ public class PHSP_JDlgClientes extends javax.swing.JDialog {
          Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
          
               Util.limpar(jTxtNome, jTxtCodigo, jFmtTelefone,jTxtEstado,jTxtCidade,jTxtGenero,jFmtCpf,jTxtEmail,jTxtEndereco,jFmtCep,
-                      jFmtDataNascimento,jTxtPais,jPwdSenha,jTxtStatus,jFmtDataCadastro,jBtnConfirmar,jBtnCancelar);
+                      jFmtDataNascimento,jTxtPais,jPwdSenha,jTxtStatus,jFmtDataCadastro);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed

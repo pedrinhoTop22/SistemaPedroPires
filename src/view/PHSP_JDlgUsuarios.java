@@ -275,8 +275,8 @@ public class PHSP_JDlgUsuarios extends javax.swing.JDialog {
         
          Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
          
-              Util.limpar(jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf, jCboNivel, jBtnIncluir, 
-        jFmtDataDeNascimento, jPwfSenha, jCboNivel, jChbAtivo, jBtnConfirmar,jBtnCancelar);
+              Util.limpar(jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf, jCboNivel, 
+        jFmtDataDeNascimento, jPwfSenha, jCboNivel, jChbAtivo);
 
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
@@ -294,8 +294,8 @@ public class PHSP_JDlgUsuarios extends javax.swing.JDialog {
         
          Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
          
-              Util.limpar(jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf, jCboNivel, jBtnIncluir, 
-        jFmtDataDeNascimento, jPwfSenha, jCboNivel, jChbAtivo, jBtnConfirmar,jBtnCancelar);
+              Util.limpar(jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf, jCboNivel, 
+        jFmtDataDeNascimento, jPwfSenha, jCboNivel, jChbAtivo);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jTxtCodigoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTxtCodigoFocusLost
