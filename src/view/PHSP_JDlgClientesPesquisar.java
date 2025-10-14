@@ -4,24 +4,39 @@
  */
 package view;
 
+import bean.Phspclientes;
+import dao.PhspClientesDAO;
+import java.util.List;
+import view.PHSP_JDlgClientes;
+
 /**
  *
- * @author pedro
+ * @author Pedro
  */
 public class PHSP_JDlgClientesPesquisar extends javax.swing.JDialog {
 
-     PHSP_JDlgClientes jDlgphspClientes;
-    
     /**
-     * Creates new form PHSP_JDlgClientes
+     * Creates new form JDlgClientesPesquisar
      */
+    private PHSP_JDlgClientes jDlgClientes;
+    PHSP_ControllerClientes controllerClientes;
+    
     public PHSP_JDlgClientesPesquisar(java.awt.Frame parent, boolean modal) {
-       super(parent, modal);
-       initComponents();        
+        super(parent, modal);
+        initComponents();
         setLocationRelativeTo(null);
+        setTitle("Pesquisar Clientes");
+        controllerClientes = new PHSP_ControllerClientes();
+        PhspClientesDAO phspClientesDAO = new PhspClientesDAO();
+        List lista = (List) phspClientesDAO.listAll();
+        controllerClientes.setList(lista);
+        jTable1.setModel(controllerClientes);
     }
 
-
+    public void setTelaAnterior( PHSP_JDlgClientes jDlgClientes) {
+        this.jDlgClientes = jDlgClientes;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,10 +97,12 @@ public class PHSP_JDlgClientesPesquisar extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnOk1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOk1ActionPerformed
-        dispose();
+         Phspclientes phspclientes =  controllerClientes.getBean( jTable1.getSelectedRow() );
+        jDlgClientes.beanView(phspclientes);
+        this.setVisible(false);
     }//GEN-LAST:event_jBtnOk1ActionPerformed
 
-    /**
+   /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -102,16 +119,14 @@ public class PHSP_JDlgClientesPesquisar extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PHSP_JDlgClientesPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PHSP_JDlgUsuariosPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PHSP_JDlgClientesPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PHSP_JDlgUsuariosPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PHSP_JDlgClientesPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PHSP_JDlgUsuariosPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PHSP_JDlgClientesPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PHSP_JDlgUsuariosPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

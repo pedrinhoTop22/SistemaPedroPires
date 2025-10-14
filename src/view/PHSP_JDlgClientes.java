@@ -5,15 +5,17 @@
  */
 package view;
 
-import javax.swing.JOptionPane;
+import bean.Phspclientes;
+import dao.PhspClientesDAO;
 import tools.Util;
-import static tools.Util.pergunta;
 
 /**
  *
  * @author pedro
  */
 public class PHSP_JDlgClientes extends javax.swing.JDialog {
+    
+      private boolean incluir;
 
     /**
      * Creates new form PHSP_JDlgClientes
@@ -26,6 +28,47 @@ public class PHSP_JDlgClientes extends javax.swing.JDialog {
         Util.habilitar(false, jTxtNome, jTxtCodigo, jFmtTelefone,jTxtEstado,jTxtCidade,jTxtGenero,jFmtCpf,jTxtEmail,jTxtEndereco,jFmtCep,
                 jFmtDataNascimento,jTxtPais,jPwdSenha,jTxtStatus,jFmtDataCadastro,jBtnConfirmar,jBtnCancelar);
   
+    }
+
+     public void beanView(Phspclientes phspclientes) {
+        jTxtCodigo.setText(Util.intToStr(phspclientes.getPhspIdClientes()));
+        jTxtNome.setText(phspclientes.getPhspNome());
+        jFmtCpf.setText(phspclientes.getPhspCpf());
+        jTxtEmail.setText(phspclientes.getPhspEmail());
+        jFmtTelefone.setText(phspclientes.getPhspTelefone());
+        jTxtEndereco.setText(phspclientes.getPhspEndereco());
+        jTxtCidade.setText(phspclientes.getPhspCidade());
+        jTxtEstado.setText(phspclientes.getPhspEstado());
+        jFmtCep.setText(phspclientes.getPhspCep());
+        jFmtDataNascimento.setText(Util.dateToStr(phspclientes.getPhspDataNascimento()));
+        jTxtGenero.setText(phspclientes.getPhspGenero());
+        jPwdSenha.setText(phspclientes.getPhspSenha());
+        jFmtDataCadastro.setText(Util.dateToStr(phspclientes.getPhspDataCadastro()));
+        jTxtStatus.setText(phspclientes.getPhspStatus());
+        jTxtPais.setText(phspclientes.getPhspPais());
+
+    }
+
+    public Phspclientes viewBean() {
+        Phspclientes phspclientes = new Phspclientes();
+        int codigo = Util.strToInt(jTxtCodigo.getText());
+        phspclientes.setPhspIdClientes(codigo);
+        //clientes.setIdclientes(Util.strToInt( jTxtCodigo.getText() ));
+        phspclientes.setPhspNome(jTxtNome.getText());
+        phspclientes.setPhspCpf(jFmtCpf.getText());
+        phspclientes.setPhspEmail(jTxtEmail.getText());
+        phspclientes.setPhspTelefone(jFmtTelefone.getText());
+        phspclientes.setPhspEndereco(jTxtEndereco.getText());
+        phspclientes.setPhspCidade(jTxtCidade.getText());
+        phspclientes.setPhspEstado(jTxtEstado.getText());
+        phspclientes.setPhspCep(jFmtCep.getText());
+        phspclientes.setPhspDataNascimento(Util.strToDate(jFmtDataNascimento.getText()));
+        phspclientes.setPhspGenero(jTxtGenero.getText());
+        phspclientes.setPhspSenha(jPwdSenha.getText());
+        phspclientes.setPhspDataCadastro(Util.strToDate(jFmtDataCadastro.getText()));
+        phspclientes.setPhspStatus(jTxtStatus.getText());
+        phspclientes.setPhspPais(jTxtPais.getText());
+        return phspclientes;
     }
 
     /**
@@ -387,13 +430,23 @@ public class PHSP_JDlgClientes extends javax.swing.JDialog {
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
-   Util.habilitar(false, jTxtNome, jTxtCodigo, jFmtTelefone,jTxtEstado,jTxtCidade,jTxtGenero,jFmtCpf,jTxtEmail,jTxtEndereco,jFmtCep,
-           jFmtDataNascimento,jTxtPais,jPwdSenha,jTxtStatus,jFmtDataCadastro,jBtnIncluir,jBtnConfirmar,jBtnCancelar);
+           PhspClientesDAO phspClientesDAO = new PhspClientesDAO();
+        Phspclientes phspclientes = viewBean();
+        if (incluir == true) {
+            phspClientesDAO.insert(phspclientes);
+          
+        } else {
+            phspClientesDAO.update(phspclientes);
+           
+        }
         
-         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-         
-              Util.limpar(jTxtNome, jTxtCodigo, jFmtTelefone,jTxtEstado,jTxtCidade,jTxtGenero,jFmtCpf,jTxtEmail,jTxtEndereco,jFmtCep,
+
+        Util.habilitar(false, jTxtNome, jTxtCodigo, jFmtTelefone,jTxtEstado,jTxtCidade,jTxtGenero,jFmtCpf,jTxtEmail,jTxtEndereco,jFmtCep,
+           jFmtDataNascimento,jTxtPais,jPwdSenha,jTxtStatus,jFmtDataCadastro, jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limpar(jTxtNome, jTxtCodigo, jFmtTelefone,jTxtEstado,jTxtCidade,jTxtGenero,jFmtCpf,jTxtEmail,jTxtEndereco,jFmtCep,
                       jFmtDataNascimento,jTxtPais,jPwdSenha,jTxtStatus,jFmtDataCadastro);
+        
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
@@ -409,8 +462,9 @@ public class PHSP_JDlgClientes extends javax.swing.JDialog {
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here:
-          PHSP_JDlgUsuariosPesquisar telaPesquisar = new PHSP_JDlgUsuariosPesquisar(null, true);
-        telaPesquisar.setVisible(true);
+         PHSP_JDlgClientesPesquisar jDlgClientesPesquisar = new PHSP_JDlgClientesPesquisar(null, true);
+        jDlgClientesPesquisar.setTelaAnterior(this);
+        jDlgClientesPesquisar.setVisible(true);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
@@ -419,6 +473,7 @@ public class PHSP_JDlgClientes extends javax.swing.JDialog {
                 jFmtDataNascimento,jTxtPais,jPwdSenha,jTxtStatus,jFmtDataCadastro,jBtnIncluir,jBtnConfirmar,jBtnCancelar);
         
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        incluir = true;
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
@@ -427,15 +482,19 @@ public class PHSP_JDlgClientes extends javax.swing.JDialog {
                 jFmtDataNascimento,jTxtPais,jPwdSenha,jTxtStatus,jFmtDataCadastro,jBtnIncluir,jBtnConfirmar,jBtnCancelar);
         
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        incluir = false;
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         // TODO add your handling code here:
-         if (pergunta("Tem certeza que deseja excluir?")) {
-        JOptionPane.showMessageDialog(null, "Excluído");} 
+          if (Util.pergunta("Deseja excluir ?") == true) {
+            PhspClientesDAO phspClientesDAO = new PhspClientesDAO();
+            phspClientesDAO.delete(viewBean());
+        }
+        Util.limpar(jTxtNome, jTxtCodigo, jFmtTelefone,jTxtEstado,jTxtCidade,jTxtGenero,jFmtCpf,jTxtEmail,jTxtEndereco,jFmtCep,
+                jFmtDataNascimento,jTxtPais,jPwdSenha,jTxtStatus,jFmtDataCadastro);
     }//GEN-LAST:event_jBtnExcluirActionPerformed
-
-    /**
+ /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -452,14 +511,17 @@ public class PHSP_JDlgClientes extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PHSP_JDlgClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PHSP_JDlgUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PHSP_JDlgClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PHSP_JDlgUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PHSP_JDlgClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PHSP_JDlgUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PHSP_JDlgClientes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PHSP_JDlgUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
