@@ -5,24 +5,64 @@
  */
 package view;
 
-import javax.swing.JOptionPane;
+import bean.Phspusuarios;
+import dao.PhspUsuariosDAO;
 import tools.Util;
-import static tools.Util.pergunta;
 
-
-
+/**
+ *
+ * @author Pedro
+ */
 public class PHSP_JDlgUsuarios extends javax.swing.JDialog {
+
+    private boolean incluir;
 
     public PHSP_JDlgUsuarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setTitle("Cadastro de Usuários");
         setLocationRelativeTo(null);
-        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf, jCboNivel
-        , jFmtDataDeNascimento, jPwfSenha, jCboNivel, jChbAtivo, jBtnConfirmar,jBtnCancelar); 
+        Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtApelido, jFmtCpf,
+                jFmtDataDeNascimento, jPwfSenha, jCboNivel, jChbAtivo,
+                jBtnConfirmar, jBtnCancelar);
     }
-    
-    
+
+    public void beanView(Phspusuarios phspusuarios) {
+        jTxtCodigo.setText(Util.intToStr(phspusuarios.getPhspIdUsuarios()));
+        jTxtNome.setText(phspusuarios.getPhspNome());
+        jTxtApelido.setText(phspusuarios.getPhspApelido());
+        jFmtCpf.setText(phspusuarios.getPhspCpf());
+        jFmtDataDeNascimento.setText(Util.dateToStr(phspusuarios.getPhspDataNascimento()));
+        jPwfSenha.setText(phspusuarios.getPhspSenha());
+        jCboNivel.setSelectedIndex(phspusuarios.getPhspNivel());
+        //jChbAtivo.setSelected( phspusuarios.getAtivo().equals("S"));
+        if (phspusuarios.getPhspAtivo().equals("S") == true) {
+            jChbAtivo.setSelected(true);
+        } else {
+            jChbAtivo.setSelected(false);
+        }
+
+    }
+
+    public Phspusuarios viewBean() {
+        Phspusuarios phspusuarios = new Phspusuarios();
+        int codigo = Util.strToInt(jTxtCodigo.getText());
+        phspusuarios.setPhspIdUsuarios(codigo);
+        //usuarios.setIdusuarios(Util.strToInt( jTxtCodigo.getText() ));
+
+        phspusuarios.setPhspNome(jTxtNome.getText());
+        phspusuarios.setPhspApelido(jTxtApelido.getText());
+        phspusuarios.setPhspCpf(jFmtCpf.getText());
+        phspusuarios.setPhspDataNascimento(Util.strToDate(jFmtDataDeNascimento.getText()));
+        phspusuarios.setPhspSenha(jPwfSenha.getText());
+        phspusuarios.setPhspNivel(jCboNivel.getSelectedIndex());
+        if (jChbAtivo.isSelected() == true) {
+            phspusuarios.setPhspAtivo("S");
+        } else {
+            phspusuarios.setPhspAtivo("N");
+        }
+        return phspusuarios;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -247,55 +287,74 @@ public class PHSP_JDlgUsuarios extends javax.swing.JDialog {
     }//GEN-LAST:event_jTxtNomeActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
-        // TODO add your handling code here:
-         Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf, jCboNivel, jBtnIncluir
-        , jFmtDataDeNascimento, jPwfSenha, jCboNivel, jChbAtivo, jBtnConfirmar,jBtnCancelar);
-         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+  // TODO add your handling code here:
+        Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtApelido, jFmtCpf,
+                jFmtDataDeNascimento, jPwfSenha, jCboNivel, jChbAtivo,
+                jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limpar(jTxtCodigo, jTxtNome, jTxtApelido, jFmtCpf, jFmtDataDeNascimento,
+                jPwfSenha, jCboNivel, jChbAtivo);
+        incluir = true;
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
-        // TODO add your handling code here:
-          Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf, jCboNivel, jBtnIncluir
-        , jFmtDataDeNascimento, jPwfSenha, jCboNivel, jChbAtivo, jBtnConfirmar,jBtnCancelar);
-         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+         // TODO add your handling code here:
+        Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtApelido, jFmtCpf,
+                jFmtDataDeNascimento, jPwfSenha, jCboNivel, jChbAtivo,
+                jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        incluir = false;
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-        // TODO add your handling code here:
-        if (pergunta("Tem certeza que deseja excluir?")) {
-        JOptionPane.showMessageDialog(null, "Excluído");} 
+      // TODO add your handling code here:
+        if (Util.pergunta("Deseja excluir ?") == true) {
+            PhspUsuariosDAO phspUsuariosDAO = new PhspUsuariosDAO();
+            phspUsuariosDAO.delete(viewBean());
+        }
+        Util.limpar(jTxtCodigo, jTxtNome, jTxtApelido, jFmtCpf, jFmtDataDeNascimento,
+                jPwfSenha, jCboNivel, jChbAtivo);
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-        // TODO add your handling code here:
- 
-        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf, jCboNivel, jBtnIncluir, 
-        jFmtDataDeNascimento, jPwfSenha, jCboNivel, jChbAtivo, jBtnConfirmar,jBtnCancelar);
+       // TODO add your handling code here:
+        PhspUsuariosDAO phspUsuariosDAO = new PhspUsuariosDAO();
+        Phspusuarios phspusuarios = viewBean();
+        if (incluir == true) {
+            phspUsuariosDAO.insert(phspusuarios);
+            //usuariosDAO.insert( viewBean() );
+        } else {
+            phspUsuariosDAO.update(phspusuarios);
+            //usuariosDAO.update( viewBean() );
+        }
         
-         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-         
-              Util.limpar(jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf, jCboNivel, 
-        jFmtDataDeNascimento, jPwfSenha, jCboNivel, jChbAtivo);
+
+        Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtApelido, jFmtCpf,
+                jFmtDataDeNascimento, jPwfSenha, jCboNivel, jChbAtivo,
+                jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limpar(jTxtCodigo, jTxtNome, jTxtApelido, jFmtCpf, jFmtDataDeNascimento,
+                jPwfSenha, jCboNivel, jChbAtivo);
 
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
-        // TODO add your handling code here: 
-     PHSP_JDlgUsuariosPesquisar telaPesquisar = new PHSP_JDlgUsuariosPesquisar(null, true);
-        telaPesquisar.setVisible(true);
+       // TODO add your handling code here: 
+        PHSP_JDlgUsuariosPesquisar jDlgUsuariosPesquisar = new PHSP_JDlgUsuariosPesquisar(null, true);
+        jDlgUsuariosPesquisar.setTelaAnterior(this);
+        jDlgUsuariosPesquisar.setVisible(true);
         
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
-        // TODO add your handling code here:
-            Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf, jCboNivel, jBtnIncluir, 
-        jFmtDataDeNascimento, jPwfSenha, jCboNivel, jChbAtivo, jBtnConfirmar,jBtnCancelar);
-        
-         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-         
-              Util.limpar(jTxtNome, jTxtCodigo, jTxtApelido,jFmtCpf, jCboNivel, 
-        jFmtDataDeNascimento, jPwfSenha, jCboNivel, jChbAtivo);
+       // TODO add your handling code here:
+        Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtApelido, jFmtCpf,
+                jFmtDataDeNascimento, jPwfSenha, jCboNivel, jChbAtivo,
+                jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limpar(jTxtCodigo, jTxtNome, jTxtApelido, jFmtCpf, jFmtDataDeNascimento,
+                jPwfSenha, jCboNivel, jChbAtivo);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jTxtCodigoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTxtCodigoFocusLost
@@ -307,6 +366,7 @@ public class PHSP_JDlgUsuarios extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCboNivelActionPerformed
 
+   
     /**
      * @param args the command line arguments
      */
@@ -332,10 +392,6 @@ public class PHSP_JDlgUsuarios extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(PHSP_JDlgUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>

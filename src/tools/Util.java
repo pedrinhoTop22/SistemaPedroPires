@@ -53,19 +53,19 @@ public static void mensagem(String cad){
 public static int strToInt(String num){
     return Integer.parseInt(num); 
 }
-public static String IntTostr(int num){
+public static String intToStr(int num){
     return String.valueOf(num);
 }
 public static double strToDouble(double num){
     return 0.0;
 }
-public static String DoubleTostr(String num){
+public static String doubleToStr(String num){
     return " ";
 }
-public static Date strToData(Date num){
+public static Date strToDate(String data){
     return null;
 }
-public static String DataTostr(String num){
+public static String dateToStr(Date data){
     return " ";
 }
 }

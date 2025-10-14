@@ -4,26 +4,39 @@
  */
 package view;
 
-
+import bean.Phspusuarios;
+import dao.PhspUsuariosDAO;
+import java.util.List;
+import view.PHSP_JDlgUsuarios;
 
 /**
  *
- * @author pedro
+ * @author Pedro
  */
 public class PHSP_JDlgUsuariosPesquisar extends javax.swing.JDialog {
-    
-    PHSP_JDlgUsuarios jDlgphspUsuarios;
 
     /**
      * Creates new form JDlgUsuariosPesquisar
      */
+    private PHSP_JDlgUsuarios jDlgUsuarios;
+    PHSP_ControllerUsuarios controllerUsuarios;
+    
     public PHSP_JDlgUsuariosPesquisar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-       initComponents();        
+        initComponents();
         setLocationRelativeTo(null);
+        setTitle("Pesquisar Usuários");
+        controllerUsuarios = new PHSP_ControllerUsuarios();
+        PhspUsuariosDAO phspUsuariosDAO = new PhspUsuariosDAO();
+        List lista = (List) phspUsuariosDAO.listAll();
+        controllerUsuarios.setList(lista);
+        jTable1.setModel(controllerUsuarios);
+    }
+
+    public void setTelaAnterior( PHSP_JDlgUsuarios jDlgUsuarios) {
+        this.jDlgUsuarios = jDlgUsuarios;
     }
     
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -84,10 +97,13 @@ public class PHSP_JDlgUsuariosPesquisar extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
-        // TODO add your handling code here:
-        dispose();
+         // TODO add your handling code here:
+        Phspusuarios phspusuarios =  controllerUsuarios.getBean( jTable1.getSelectedRow() );
+        jDlgUsuarios.beanView(phspusuarios);
+        this.setVisible(false);
     }//GEN-LAST:event_jBtnOkActionPerformed
 
+ 
     /**
      * @param args the command line arguments
      */
@@ -113,8 +129,6 @@ public class PHSP_JDlgUsuariosPesquisar extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(PHSP_JDlgUsuariosPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
