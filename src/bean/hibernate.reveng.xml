@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="db_pedro_pires"/>
+  <table-filter match-name="phspprodutos"/>
+  <table-filter match-name="phspfuncionarios"/>
+  <table-filter match-name="phspclientes"/>
+  <table-filter match-name="phspvendas"/>
+  <table-filter match-name="phspusuarios"/>
+  <table-filter match-name="phspvendasprodutos"/>
+</hibernate-reverse-engineering>
