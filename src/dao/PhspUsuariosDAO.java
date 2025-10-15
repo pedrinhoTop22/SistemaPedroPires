@@ -67,4 +67,14 @@ public class PhspUsuariosDAO extends AbstractDAO{
         PhspUsuariosDAO    phspUsuariosDAO = new PhspUsuariosDAO();
         phspUsuariosDAO.listAll();
     }
+    
+    public boolean existeId(int id) {
+    session.beginTransaction();
+    Criteria criteria = session.createCriteria(Phspusuarios.class);
+    criteria.add(Restrictions.eq("phspIdUsuarios", id));
+    List lista = criteria.list();
+    session.getTransaction().commit();
+
+    return !lista.isEmpty();
+    }
 }

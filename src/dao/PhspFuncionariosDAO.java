@@ -66,4 +66,14 @@ public class PhspFuncionariosDAO extends AbstractDAO{
         PhspFuncionariosDAO    phspFuncionariosDAO = new PhspFuncionariosDAO();
         phspFuncionariosDAO.listAll();
     }
+    
+    public boolean existeId(int id) {
+    session.beginTransaction();
+    Criteria criteria = session.createCriteria(Phspfuncionarios.class);
+    criteria.add(Restrictions.eq("phspIdFuncionario", id));
+    List lista = criteria.list();
+    session.getTransaction().commit();
+
+    return !lista.isEmpty();
+    }
 }

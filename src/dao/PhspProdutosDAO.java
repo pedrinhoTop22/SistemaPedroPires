@@ -67,4 +67,15 @@ public class PhspProdutosDAO extends AbstractDAO{
         PhspProdutosDAO    phspProdutosDAO = new PhspProdutosDAO();
         phspProdutosDAO.listAll();
     }
+    
+     public boolean existeId(int id) {
+    session.beginTransaction();
+    Criteria criteria = session.createCriteria(Phspprodutos.class);
+    criteria.add(Restrictions.eq("phspIdProdutos", id));
+    List lista = criteria.list();
+    session.getTransaction().commit();
+
+    return !lista.isEmpty();
+    }
+    
 }

@@ -18,6 +18,8 @@ import org.hibernate.criterion.Restrictions;
  * @author pedro
  */
 public class PhspClientesDAO extends AbstractDAO{
+    
+    
 
     @Override
     public void insert(Object object) {
@@ -66,5 +68,15 @@ public class PhspClientesDAO extends AbstractDAO{
     public static void main(String[] args) {
         PhspClientesDAO    phspClientesDAO = new PhspClientesDAO();
         phspClientesDAO.listAll();
+    }
+    
+    public boolean existeId(int id) {
+    session.beginTransaction();
+    Criteria criteria = session.createCriteria(Phspclientes.class);
+    criteria.add(Restrictions.eq("phspIdClientes", id));
+    List lista = criteria.list();
+    session.getTransaction().commit();
+
+    return !lista.isEmpty();
     }
 }

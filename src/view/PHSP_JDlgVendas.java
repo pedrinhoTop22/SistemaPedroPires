@@ -403,6 +403,26 @@ public class PHSP_JDlgVendas extends javax.swing.JDialog {
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
         PhspVendasDAO phspVendasDAO = new PhspVendasDAO();
+        
+        String codigoTexto = jTxtCodigo.getText().trim();
+    
+    if (codigoTexto.isEmpty()) {
+        Util.mensagem("O campo ID não pode estar vazio");
+        return;
+    }
+    
+    if (!codigoTexto.matches("\\d+")) {
+        Util.mensagem("O campo ID deve conter apenas números (sem letras ou símbolos)");
+        return;
+    }
+    
+    int codigo = Integer.parseInt(codigoTexto);
+    
+    if (incluir && phspVendasDAO.existeId(codigo)) {
+        Util.mensagem("Este ID já está cadastrado no sistema");
+        return;
+    }
+        
         Phspvendas phspvendas = viewBean();
         if (incluir == true) {
             phspVendasDAO.insert(phspvendas);

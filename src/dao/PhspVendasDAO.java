@@ -67,4 +67,14 @@ public class PhspVendasDAO extends AbstractDAO{
         PhspVendasDAO    phspVendasDAO = new PhspVendasDAO();
         phspVendasDAO.listAll();
     }
+    
+     public boolean existeId(int id) {
+    session.beginTransaction();
+    Criteria criteria = session.createCriteria(Phspvendas.class);
+    criteria.add(Restrictions.eq("phspIdVendas", id));
+    List lista = criteria.list();
+    session.getTransaction().commit();
+
+    return !lista.isEmpty();
+    }
 }

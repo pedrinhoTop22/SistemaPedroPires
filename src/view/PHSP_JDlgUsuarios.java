@@ -124,7 +124,7 @@ public class PHSP_JDlgUsuarios extends javax.swing.JDialog {
 
         jLabel7.setText("Nível");
 
-        jCboNivel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "administrador", "funcionario", "vendedor", "gerente" }));
+        jCboNivel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrador", "Funcionario", "Vendedor", "Gerente" }));
         jCboNivel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCboNivelActionPerformed(evt);
@@ -320,6 +320,26 @@ public class PHSP_JDlgUsuarios extends javax.swing.JDialog {
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
        // TODO add your handling code here:
         PhspUsuariosDAO phspUsuariosDAO = new PhspUsuariosDAO();
+        
+        String codigoTexto = jTxtCodigo.getText().trim();
+    
+    if (codigoTexto.isEmpty()) {
+        Util.mensagem("O campo ID não pode estar vazio");
+        return;
+    }
+    
+    if (!codigoTexto.matches("\\d+")) {
+        Util.mensagem("O campo ID deve conter apenas números (sem letras ou símbolos)");
+        return;
+    }
+    
+    int codigo = Integer.parseInt(codigoTexto);
+    
+    if (incluir && phspUsuariosDAO.existeId(codigo)) {
+        Util.mensagem("Este ID já está cadastrado no sistema");
+        return;
+    }
+        
         Phspusuarios phspusuarios = viewBean();
         if (incluir == true) {
             phspUsuariosDAO.insert(phspusuarios);
