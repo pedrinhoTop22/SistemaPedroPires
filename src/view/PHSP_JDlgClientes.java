@@ -478,7 +478,7 @@ public class PHSP_JDlgClientes extends javax.swing.JDialog {
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-          Util.habilitar(true, jTxtNome, jTxtCodigo, jFmtTelefone,jTxtEstado,jTxtCidade,jTxtGenero,jFmtCpf,jTxtEmail,jTxtEndereco,jFmtCep,
+          Util.habilitar(true, jTxtNome, jFmtTelefone,jTxtEstado,jTxtCidade,jTxtGenero,jFmtCpf,jTxtEmail,jTxtEndereco,jFmtCep,
                 jFmtDataNascimento,jTxtPais,jPwdSenha,jTxtStatus,jFmtDataCadastro,jBtnIncluir,jBtnConfirmar,jBtnCancelar);
         
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);

@@ -124,6 +124,18 @@ public class Phspprodutos  implements java.io.Serializable {
     }
 
 
+@Override
+    public String toString() {
+    return this.getPhspNome(); 
+}
+    @Override
+public boolean equals(Object obj) {
+    if (obj instanceof Phspprodutos) {
+        Phspprodutos phspprodutos = (Phspprodutos) obj;
+        return this.getPhspIdProdutos()== phspprodutos.getPhspIdProdutos();
+    }
+    return false;
+}
 
 
 

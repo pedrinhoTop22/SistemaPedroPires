@@ -173,7 +173,7 @@ public class PHSP_JFrmPrincipal extends javax.swing.JFrame {
 
     private void jMenuVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuVendasActionPerformed
         // TODO add your handling code here:
-        
+        new view.PHSP_JDlgVendas(this, true).setVisible(true);
     }//GEN-LAST:event_jMenuVendasActionPerformed
 
     /**

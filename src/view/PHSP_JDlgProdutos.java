@@ -303,7 +303,7 @@ public class PHSP_JDlgProdutos extends javax.swing.JDialog {
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-       Util.habilitar(true,jTxtCodigo,jTxtNome, jTxtCategoria,jTxtPlataforma, jFmtLancamento
+       Util.habilitar(true,jTxtNome, jTxtCategoria,jTxtPlataforma, jFmtLancamento
         , jTxtPreco, jTxtDescricao,jBtnIncluir, jBtnConfirmar,jBtnCancelar);
          Util.habilitar(false,jBtnIncluir, jBtnAlterar, jBtnExcluir13, jBtnPesquisar);
          incluir = false;

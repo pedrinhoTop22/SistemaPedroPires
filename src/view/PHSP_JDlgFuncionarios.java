@@ -316,7 +316,7 @@ public class PHSP_JDlgFuncionarios extends javax.swing.JDialog {
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
-          Util.habilitar(true,jTxtCodigo,jTxtNome,jFmtCPF,jTxtEmail, jTxtCargo,jFmtTelefone,jFmtDataAdmissao, jBtnIncluir, jBtnConfirmar,jBtnCancelar);
+          Util.habilitar(true,jTxtNome,jFmtCPF,jTxtEmail, jTxtCargo,jFmtTelefone,jFmtDataAdmissao, jBtnIncluir, jBtnConfirmar,jBtnCancelar);
          Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
          incluir = false;
     }//GEN-LAST:event_jBtnAlterarActionPerformed
