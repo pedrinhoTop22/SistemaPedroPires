@@ -4,24 +4,39 @@
  */
 package view;
 
+import bean.Phspfuncionarios;
+import dao.PhspFuncionariosDAO;
+import java.util.List;
+import view.PHSP_JDlgFuncionarios;
 
 /**
  *
- * @author pedro
+ * @author Pedro
  */
 public class PHSP_JDlgFuncionariosPesquisar extends javax.swing.JDialog {
-    
-    PHSP_JDlgFuncionarios jDlgphspFuncionarios;
 
     /**
-     * Creates new form PHSP_JDlgFuncionariosPesquisar
+     * Creates new form JDlgFuncionariosPesquisar
      */
+    private PHSP_JDlgFuncionarios jDlgFuncionarios;
+    PHSP_ControllerFuncionarios controllerFuncionarios;
+    
     public PHSP_JDlgFuncionariosPesquisar(java.awt.Frame parent, boolean modal) {
-          super(parent, modal);
-       initComponents();        
+        super(parent, modal);
+        initComponents();
         setLocationRelativeTo(null);
+        setTitle("Pesquisar Funcionarios");
+        controllerFuncionarios = new PHSP_ControllerFuncionarios();
+        PhspFuncionariosDAO phspFuncionariosDAO = new PhspFuncionariosDAO();
+        List lista = (List) phspFuncionariosDAO.listAll();
+        controllerFuncionarios.setList(lista);
+        jTable1.setModel(controllerFuncionarios);
     }
 
+    public void setTelaAnterior( PHSP_JDlgFuncionarios jDlgFuncionarios) {
+        this.jDlgFuncionarios = jDlgFuncionarios;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,11 +97,13 @@ public class PHSP_JDlgFuncionariosPesquisar extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
-        // TODO add your handling code here:
-       dispose();
+          // TODO add your handling code here:
+        Phspfuncionarios phspfuncionarios =  controllerFuncionarios.getBean( jTable1.getSelectedRow() );
+        jDlgFuncionarios.beanView(phspfuncionarios);
+        this.setVisible(false);
     }//GEN-LAST:event_jBtnOkActionPerformed
 
-    /**
+     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {

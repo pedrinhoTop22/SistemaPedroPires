@@ -1,29 +1,49 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
-import javax.swing.JOptionPane;
+import bean.Phspfuncionarios;
+import dao.PhspFuncionariosDAO;
 import tools.Util;
-import static tools.Util.pergunta;
-
 
 /**
  *
- * @author pedro
+ * @author Pedro
  */
 public class PHSP_JDlgFuncionarios extends javax.swing.JDialog {
 
-    
+    private boolean incluir;
+
     public PHSP_JDlgFuncionarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setTitle("Cadastro de Funcionarios");
         setLocationRelativeTo(null);
         Util.habilitar(false,jTxtCodigo,jTxtNome,jFmtCPF,jTxtEmail, jTxtCargo,jFmtTelefone,jFmtDataAdmissao,
-              jBtnConfirmar,jBtnCancelar); 
+              jBtnConfirmar,jBtnCancelar);
+    }
+
+    public void beanView(Phspfuncionarios phspfuncionarios) {
+        jTxtCodigo.setText(Util.intToStr(phspfuncionarios.getPhspIdFuncionario()));
+        jTxtNome.setText(phspfuncionarios.getPhspNome());
+        jFmtCPF.setText(phspfuncionarios.getPhspCpf());
+        jTxtEmail.setText(phspfuncionarios.getPhspEmail());
+        jTxtCargo.setText(phspfuncionarios.getPhspCargo());
+        jFmtTelefone.setText(phspfuncionarios.getPhspTelefone());
+        jFmtDataAdmissao.setText(Util.dateToStr(phspfuncionarios.getPhspDataAdmissao()));
+
+    }
+
+    public Phspfuncionarios viewBean() {
+        Phspfuncionarios phspfuncionarios = new Phspfuncionarios();
+        int codigo = Util.strToInt(jTxtCodigo.getText());
+        phspfuncionarios.setPhspIdFuncionario(codigo);
+        phspfuncionarios.setPhspNome(jTxtNome.getText());
+        phspfuncionarios.setPhspCpf(jFmtCPF.getText());
+        phspfuncionarios.setPhspEmail(jTxtEmail.getText());
+        phspfuncionarios.setPhspCargo(jTxtCargo.getText());
+        phspfuncionarios.setPhspTelefone(jFmtTelefone.getText());
+        phspfuncionarios.setPhspDataAdmissao(Util.strToDate(jFmtDataAdmissao.getText()));
+   
+        return phspfuncionarios;
     }
 
     /**
@@ -235,7 +255,7 @@ public class PHSP_JDlgFuncionarios extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTxtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtCodigoActionPerformed
-        // TODO add your handling code here:
+      
     }//GEN-LAST:event_jTxtCodigoActionPerformed
 
     private void jTxtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTxtEmailActionPerformed
@@ -257,35 +277,48 @@ public class PHSP_JDlgFuncionarios extends javax.swing.JDialog {
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here:
-        PHSP_JDlgUsuariosPesquisar telaPesquisar = new PHSP_JDlgUsuariosPesquisar(null, true);
-        telaPesquisar.setVisible(true);
+        PHSP_JDlgFuncionariosPesquisar jDlgFuncionariosPesquisar = new PHSP_JDlgFuncionariosPesquisar(null, true);
+        jDlgFuncionariosPesquisar.setTelaAnterior(this);
+        jDlgFuncionariosPesquisar.setVisible(true);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-         if (pergunta("Tem certeza que deseja excluir?")) {
-        JOptionPane.showMessageDialog(null, "Excluído");} 
+        if (Util.pergunta("Deseja excluir ?") == true) {
+            PhspFuncionariosDAO phspFuncionariosDAO = new PhspFuncionariosDAO();
+            phspFuncionariosDAO.delete(viewBean());
+        }
+        Util.limpar(jTxtCodigo,jTxtNome,jFmtCPF,jTxtEmail, jTxtCargo,jFmtTelefone,jFmtDataAdmissao);
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
+        PhspFuncionariosDAO phspFuncionariosDAO = new PhspFuncionariosDAO();
+        Phspfuncionarios phspfuncionarios = viewBean();
+        if (incluir == true) {
+            phspFuncionariosDAO.insert(phspfuncionarios);
+        } else {
+            phspFuncionariosDAO.update(phspfuncionarios);
+        }
         
-        Util.habilitar(false,jTxtCodigo,jTxtNome,jFmtCPF,jTxtEmail, jTxtCargo,jFmtTelefone,jFmtDataAdmissao, jBtnIncluir, jBtnConfirmar,jBtnCancelar);
-        
-         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-         
-              Util.limpar(jTxtCodigo,jTxtNome,jFmtCPF,jTxtEmail, jTxtCargo,jFmtTelefone,jFmtDataAdmissao);
+
+        Util.habilitar(false, jTxtCodigo,jTxtNome,jFmtCPF,jTxtEmail, jTxtCargo,jFmtTelefone,jFmtDataAdmissao,
+                jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        Util.limpar(jTxtCodigo,jTxtNome,jFmtCPF,jTxtEmail, jTxtCargo,jFmtTelefone,jFmtDataAdmissao);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         // TODO add your handling code here:
       Util.habilitar(true,jTxtCodigo,jTxtNome,jFmtCPF,jTxtEmail, jTxtCargo,jFmtTelefone,jFmtDataAdmissao, jBtnIncluir, jBtnConfirmar,jBtnCancelar);
          Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+         incluir = true;
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         // TODO add your handling code here:
           Util.habilitar(true,jTxtCodigo,jTxtNome,jFmtCPF,jTxtEmail, jTxtCargo,jFmtTelefone,jFmtDataAdmissao, jBtnIncluir, jBtnConfirmar,jBtnCancelar);
          Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+         incluir = false;
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     /**
@@ -305,14 +338,17 @@ public class PHSP_JDlgFuncionarios extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PHSP_JDlgFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PHSP_JDlgUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PHSP_JDlgFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PHSP_JDlgUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PHSP_JDlgFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PHSP_JDlgUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PHSP_JDlgFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PHSP_JDlgUsuarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
