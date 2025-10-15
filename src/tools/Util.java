@@ -56,10 +56,10 @@ public static int strToInt(String num){
 public static String intToStr(int num){
     return String.valueOf(num);
 }
-public static double strToDouble(double num){
+public static double strToDouble(String num){
     return 0.0;
 }
-public static String doubleToStr(String num){
+public static String doubleToStr(double num){
     return " ";
 }
 public static Date strToDate(String data){

@@ -7,7 +7,6 @@ package view;
 import bean.Phspusuarios;
 import dao.PhspUsuariosDAO;
 import java.util.List;
-import view.PHSP_JDlgUsuarios;
 
 /**
  *

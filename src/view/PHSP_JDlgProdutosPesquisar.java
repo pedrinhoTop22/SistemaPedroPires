@@ -4,26 +4,38 @@
  */
 package view;
 
+import bean.Phspprodutos;
+import dao.PhspProdutosDAO;
+import java.util.List;
 
 /**
  *
- * @author pedro
+ * @author Pedro
  */
 public class PHSP_JDlgProdutosPesquisar extends javax.swing.JDialog {
-    
-    PHSP_JDlgProdutos jDlgphspProdutos;
 
     /**
-     * Creates new form PHSP_ProdutosPesquisar
+     * Creates new form JDlgProdutosPesquisar
      */
-    public PHSP_JDlgProdutosPesquisar(java.awt.Frame parent, boolean modal) {
-         super(parent, modal);
-       initComponents();        
-        setLocationRelativeTo(null);
-    }
- 
+    private PHSP_JDlgProdutos jDlgProdutos;
+    PHSP_ControllerProdutos controllerProdutos;
     
+    public PHSP_JDlgProdutosPesquisar(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        setLocationRelativeTo(null);
+        setTitle("Pesquisar Produtos");
+        controllerProdutos = new PHSP_ControllerProdutos();
+        PhspProdutosDAO phspProdutosDAO = new PhspProdutosDAO();
+        List lista = (List) phspProdutosDAO.listAll();
+        controllerProdutos.setList(lista);
+        jTable1.setModel(controllerProdutos);
+    }
 
+    public void setTelaAnterior( PHSP_JDlgProdutos jDlgProdutos) {
+        this.jDlgProdutos = jDlgProdutos;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -84,11 +96,13 @@ public class PHSP_JDlgProdutosPesquisar extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
-        // TODO add your handling code here:
-       dispose();
+       // TODO add your handling code here:
+        Phspprodutos phspprodutos =  controllerProdutos.getBean( jTable1.getSelectedRow() );
+        jDlgProdutos.beanView(phspprodutos);
+        this.setVisible(false);
     }//GEN-LAST:event_jBtnOkActionPerformed
 
-    /**
+  /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -113,8 +127,6 @@ public class PHSP_JDlgProdutosPesquisar extends javax.swing.JDialog {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(PHSP_JDlgProdutosPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
