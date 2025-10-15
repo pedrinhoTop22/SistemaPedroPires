@@ -226,8 +226,18 @@ public class Phspclientes  implements java.io.Serializable {
     public void setPhspPais(String phspPais) {
         this.phspPais = phspPais;
     }
-
-
+@Override
+    public String toString() {
+    return this.getPhspNome(); 
+}
+    @Override
+public boolean equals(Object obj) {
+    if (obj instanceof Phspclientes) {
+        Phspclientes phspclientes = (Phspclientes) obj;
+        return this.getPhspIdClientes()== phspclientes.getPhspIdClientes();
+    }
+    return false;
+}
 
 }
 

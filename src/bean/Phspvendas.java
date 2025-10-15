@@ -88,7 +88,7 @@ public class Phspvendas  implements java.io.Serializable {
     }
 
     @Temporal(TemporalType.DATE)
-    @Column(name="phsp_dataVenda", nullable=false, length=10)
+    @Column(name="phsp_dataVenda", length=10)
     public Date getPhspDataVenda() {
         return this.phspDataVenda;
     }

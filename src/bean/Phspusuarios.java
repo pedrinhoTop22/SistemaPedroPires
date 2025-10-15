@@ -137,8 +137,18 @@ public class Phspusuarios  implements java.io.Serializable {
         this.phspAtivo = phspAtivo;
     }
 
-
-
+@Override
+    public String toString() {
+    return this.getPhspNome(); 
+}
+    @Override
+public boolean equals(Object obj) {
+    if (obj instanceof Phspusuarios) {
+        Phspusuarios phspusuarios = (Phspusuarios) obj;
+        return this.getPhspIdUsuarios()== phspusuarios.getPhspIdUsuarios();
+    }
+    return false;
+}
 
 }
 
