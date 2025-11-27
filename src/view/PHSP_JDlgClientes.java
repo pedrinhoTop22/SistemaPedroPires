@@ -123,6 +123,12 @@ public class PHSP_JDlgClientes extends javax.swing.JDialog {
 
         jLabel10.setText("Data de Nascimento:");
 
+        try {
+            jFmtDataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         jLabel11.setText("Genero:");
 
         jLabel12.setText("Senha:");
@@ -137,6 +143,11 @@ public class PHSP_JDlgClientes extends javax.swing.JDialog {
             }
         });
 
+        try {
+            jFmtDataCadastro.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         jFmtDataCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFmtDataCadastroActionPerformed(evt);
@@ -157,6 +168,12 @@ public class PHSP_JDlgClientes extends javax.swing.JDialog {
 
         jLabel15.setText("País:");
 
+        try {
+            jFmtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         jLabel4.setText("Email:");
 
         jTxtEmail.addActionListener(new java.awt.event.ActionListener() {
@@ -172,6 +189,12 @@ public class PHSP_JDlgClientes extends javax.swing.JDialog {
         });
 
         jLabel5.setText("Telefone:");
+
+        try {
+            jFmtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         jLabel6.setText("Endereço:");
 

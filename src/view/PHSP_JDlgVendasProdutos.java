@@ -6,31 +6,38 @@
 package view;
 
 import bean.Phspprodutos;
+import bean.Phspvendas;
+import bean.Phspvendasprodutos;
 import dao.PhspProdutosDAO;
 import java.util.List;
+import tools.Util;
 
 /**
  *
  * @author Pedro
  */
-public class JDlgVendasProdutos extends javax.swing.JDialog {
-
-    /**
-     * Creates new form JDlgPedidosProdutos
-     */
-    public JDlgVendasProdutos(java.awt.Frame parent, boolean modal) {
+public class PHSP_JDlgVendasProdutos extends javax.swing.JDialog {
+            PHSP_JDlgVendas pHSP_JDlgVendas;
+    
+    public PHSP_JDlgVendasProdutos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setTitle("Vendas Produtos");
         setLocationRelativeTo(null);
+        
+        jTxtQuantidade.setText("1");
         
         PhspProdutosDAO phspProdutosDAO = new PhspProdutosDAO();
         List lista = (List) phspProdutosDAO.listAll();
         for (int i = 0; i < lista.size(); i++) {
             jCboProdutos.addItem( (Phspprodutos) lista.get(i));
         }
+        Util.habilitar(false, jTxtValorUnitario, jTxtTotal);
     }
-
+    
+     public void setTelaAnterior(PHSP_JDlgVendas pHSP_JDlgVendas) {
+        this.pHSP_JDlgVendas = pHSP_JDlgVendas;
+     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,6 +62,12 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
 
         jLabel2.setText("Quantidade");
 
+        jTxtQuantidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTxtQuantidadeKeyReleased(evt);
+            }
+        });
+
         jLabel3.setText("Valor Unitário");
 
         jLabel4.setText("Total");
@@ -76,6 +89,12 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
         });
 
         jLabel1.setText("Produtos");
+
+        jCboProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCboProdutosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -142,6 +161,11 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        Phspvendasprodutos phspvendasprodutos = new Phspvendasprodutos();
+        phspvendasprodutos.setPhspvendas((Phspvendas) jCboProdutos.getSelectedItem());
+        phspvendasprodutos.setPhspQuantidade(Util.strToInt(jTxtQuantidade.getText()) );
+        phspvendasprodutos.setPhspValorUnitario(Util.strToDouble(jTxtValorUnitario.getText()) );                
+        pHSP_JDlgVendas.controllerVenProd.addBean(phspvendasprodutos);
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -149,6 +173,25 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
         // TODO add your handling code here:
         setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jCboProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCboProdutosActionPerformed
+        // TODO add your handling code here:
+        Phspprodutos phspprodutos = (Phspprodutos) jCboProdutos.getSelectedItem();
+        jTxtValorUnitario.setText(Util.doubleToStr(phspprodutos.getPhspPreco()));
+        int quant = Util.strToInt(jTxtQuantidade.getText());
+        jTxtTotal.setText(Util.doubleToStr( quant * phspprodutos.getPhspPreco()));
+    }//GEN-LAST:event_jCboProdutosActionPerformed
+
+    private void jTxtQuantidadeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtQuantidadeKeyReleased
+        // TODO add your handling code here:
+        if(jTxtQuantidade.getText().isEmpty() == false){
+        Phspprodutos phspprodutos = (Phspprodutos) jCboProdutos.getSelectedItem();
+        int quant = Util.strToInt(jTxtQuantidade.getText());
+        jTxtTotal.setText(Util.doubleToStr( quant * phspprodutos.getPhspPreco()));
+       } else {
+           Util.limpar(jTxtTotal);
+       }
+    }//GEN-LAST:event_jTxtQuantidadeKeyReleased
 
     /**
      * @param args the command line arguments
@@ -167,20 +210,21 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDlgVendasProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PHSP_JDlgVendasProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDlgVendasProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PHSP_JDlgVendasProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDlgVendasProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PHSP_JDlgVendasProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDlgVendasProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PHSP_JDlgVendasProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDlgVendasProdutos dialog = new JDlgVendasProdutos(new javax.swing.JFrame(), true);
+                PHSP_JDlgVendasProdutos dialog = new PHSP_JDlgVendasProdutos(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

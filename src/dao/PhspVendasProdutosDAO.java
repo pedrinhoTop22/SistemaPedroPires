@@ -6,6 +6,7 @@
 
  package dao;
 
+import bean.Phspvendas;
 import bean.Phspvendasprodutos;
 import java.util.List;
 import org.hibernate.Criteria;
@@ -49,6 +50,15 @@ public class PhspVendasProdutosDAO extends AbstractDAO{
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Phspvendasprodutos.class);
         criteria.add(Restrictions.eq("phspIdVendasProdutos", codigo));
+        List lista = criteria.list();
+        session.getTransaction().commit();        
+        return lista;
+    }
+    
+    public Object listProdutos(Phspvendas phspvendas) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(Phspvendasprodutos.class);
+        criteria.add(Restrictions.eq("Vendas", phspvendas));
         List lista = criteria.list();
         session.getTransaction().commit();        
         return lista;

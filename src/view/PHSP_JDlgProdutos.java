@@ -111,6 +111,12 @@ public class PHSP_JDlgProdutos extends javax.swing.JDialog {
             }
         });
 
+        try {
+            jFmtLancamento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         jLabel6.setText("Lançamento:");
 
         jLabel1.setText("Código:");
@@ -414,20 +420,7 @@ public class PHSP_JDlgProdutos extends javax.swing.JDialog {
     private javax.swing.JButton jBtnAlterar;
     private javax.swing.JButton jBtnCancelar;
     private javax.swing.JButton jBtnConfirmar;
-    private javax.swing.JButton jBtnExcluir;
-    private javax.swing.JButton jBtnExcluir1;
-    private javax.swing.JButton jBtnExcluir10;
-    private javax.swing.JButton jBtnExcluir11;
-    private javax.swing.JButton jBtnExcluir12;
     private javax.swing.JButton jBtnExcluir13;
-    private javax.swing.JButton jBtnExcluir2;
-    private javax.swing.JButton jBtnExcluir3;
-    private javax.swing.JButton jBtnExcluir4;
-    private javax.swing.JButton jBtnExcluir5;
-    private javax.swing.JButton jBtnExcluir6;
-    private javax.swing.JButton jBtnExcluir7;
-    private javax.swing.JButton jBtnExcluir8;
-    private javax.swing.JButton jBtnExcluir9;
     private javax.swing.JButton jBtnIncluir;
     private javax.swing.JButton jBtnPesquisar;
     private javax.swing.JFormattedTextField jFmtLancamento;

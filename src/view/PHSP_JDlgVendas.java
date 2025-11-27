@@ -8,9 +8,12 @@ package view;
 import bean.Phspclientes;
 import bean.Phspusuarios;
 import bean.Phspvendas;
+import bean.Phspvendasprodutos;
 import dao.PhspClientesDAO;
 import dao.PhspUsuariosDAO;
 import dao.PhspVendasDAO;
+import dao.PhspVendasProdutosDAO;
+import java.util.ArrayList;
 import java.util.List;
 import tools.Util;
 
@@ -20,19 +23,14 @@ import tools.Util;
  */
 public class PHSP_JDlgVendas extends javax.swing.JDialog {
 
+        PHSP_ControllerVendasProdutos controllerVenProd;
         private boolean incluir;
-    /**
-     * Creates new form PHSP_JDlgVendas
-     */
+   
     public PHSP_JDlgVendas(java.awt.Frame parent, boolean modal) {
          super(parent, modal);
         initComponents();
         setTitle("Vendas");
         setLocationRelativeTo(null);
-        Util.habilitar(false, jTxtCodigo, jCboClientes, jCboUsuarios, jFmtDataVenda,
-                jTxtTotal, jTxtFormaPagamento, jTxtDesconto,
-                jBtnConfirmar, jBtnCancelar);
-        
         
         PhspClientesDAO phspClientesDAO = new PhspClientesDAO();
         List lista = (List) phspClientesDAO.listAll();
@@ -46,6 +44,9 @@ public class PHSP_JDlgVendas extends javax.swing.JDialog {
          jCboUsuarios.addItem((Phspusuarios) listaUsuarios.get(i));
 }
         
+        controllerVenProd = new PHSP_ControllerVendasProdutos();
+        controllerVenProd.setList(new ArrayList());
+        jTable1.setModel(controllerVenProd);
       
     }
     
@@ -59,11 +60,15 @@ public class PHSP_JDlgVendas extends javax.swing.JDialog {
         jTxtFormaPagamento.setText(Util.doubleToStr(phspvendas.getPhspTotal()));
         jTxtDesconto.setText(Util.doubleToStr(phspvendas.getPhspTotal()));
 
+        PhspVendasProdutosDAO phspVendasProdutosDAO = new PhspVendasProdutosDAO();
+        List lista = (List) phspVendasProdutosDAO.listProdutos(phspvendas);
+        controllerVenProd.setList(lista);
+        
     }
 
     public Phspvendas viewBean() {
         Phspvendas phspvendas = new Phspvendas();
-        int codigo = Util.strToInt(jTxtCodigo.getText());
+        phspvendas.setPhspIdVendas(Util.strToInt(jTxtCodigo.getText()));
         //vendas.setIdvendas(Util.strToInt( jTxtCodigo.getText() ));
         phspvendas.setPhspclientes((Phspclientes)jCboClientes.getSelectedItem());
         phspvendas.setPhspusuarios((Phspusuarios)jCboUsuarios.getSelectedItem());
@@ -175,6 +180,12 @@ public class PHSP_JDlgVendas extends javax.swing.JDialog {
                 jBtnPesquisarActionPerformed(evt);
             }
         });
+
+        try {
+            jFmtDataVenda.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         jBtnIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/incluir.png"))); // NOI18N
         jBtnIncluir.setText("Incluir");
@@ -342,20 +353,25 @@ public class PHSP_JDlgVendas extends javax.swing.JDialog {
 
     private void jBtnIncluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirProdActionPerformed
         // TODO add your handling code here:
-   JDlgVendasProdutos jDlgVendasProdutos = new JDlgVendasProdutos(null, true);
+        PHSP_JDlgVendasProdutos jDlgVendasProdutos = new PHSP_JDlgVendasProdutos(null, true);
+        jDlgVendasProdutos.setTelaAnterior(this);
         jDlgVendasProdutos.setVisible(true);
     }//GEN-LAST:event_jBtnIncluirProdActionPerformed
 
     private void jBtnAlterarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarProdActionPerformed
         // TODO add your handling code here:
-  JDlgVendasProdutos jDlgVendasProdutos = new JDlgVendasProdutos(null, true);
+        PHSP_JDlgVendasProdutos jDlgVendasProdutos = new PHSP_JDlgVendasProdutos(null, true);
         jDlgVendasProdutos.setVisible(true);
     }//GEN-LAST:event_jBtnAlterarProdActionPerformed
 
     private void jBtnExcluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirProdActionPerformed
         // TODO add your handling code here:
-        if (Util.perguntar("Deseja excluir o produto ?")== true) {
-
+        if (jTable1.getSelectedRow() == -1) {
+            Util.mensagem("É necessario selecionar uma linha antes de excluir.");
+        } else {
+            if (Util.perguntar("Deseja excluir o produto?") == true) {
+                controllerVenProd.removeBean(jTable1.getSelectedRow());
+            }
         }
     }//GEN-LAST:event_jBtnExcluirProdActionPerformed
 
@@ -380,6 +396,7 @@ public class PHSP_JDlgVendas extends javax.swing.JDialog {
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         Util.limpar(jTxtCodigo, jCboClientes, jCboUsuarios, jFmtDataVenda,
                 jTxtTotal, jTxtFormaPagamento, jTxtDesconto);
+        controllerVenProd.setList(new ArrayList());
         incluir = true;
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
@@ -388,49 +405,45 @@ public class PHSP_JDlgVendas extends javax.swing.JDialog {
                 jTxtTotal, jTxtFormaPagamento, jTxtDesconto,
                 jBtnConfirmar, jBtnCancelar);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+        controllerVenProd.setList(new ArrayList());
         incluir = false;
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
         if (Util.perguntar("Deseja excluir ?") == true) {
             PhspVendasDAO phspVendasDAO = new PhspVendasDAO();
+            PhspVendasProdutosDAO phspVendasProdutosDAO = new PhspVendasProdutosDAO();
+            
+            for (int ind = 0; ind < jTable1.getRowCount(); ind++) {
+                Phspvendasprodutos phspvendasprodutos = controllerVenProd.getBean(ind);
+                phspVendasProdutosDAO.delete(phspvendasprodutos);
+            }
             phspVendasDAO.delete(viewBean());
         }
+        
+        
         Util.limpar(jTxtCodigo, jCboClientes, jCboUsuarios, jFmtDataVenda,
                 jTxtTotal, jTxtFormaPagamento, jTxtDesconto);
+        controllerVenProd.setList(new ArrayList());
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         // TODO add your handling code here:
         PhspVendasDAO phspVendasDAO = new PhspVendasDAO();
-        
-        String codigoTexto = jTxtCodigo.getText().trim();
-    
-    if (codigoTexto.isEmpty()) {
-        Util.mensagem("O campo ID não pode estar vazio");
-        return;
-    }
-    
-    if (!codigoTexto.matches("\\d+")) {
-        Util.mensagem("O campo ID deve conter apenas números (sem letras ou símbolos)");
-        return;
-    }
-    
-    int codigo = Integer.parseInt(codigoTexto);
-    
-    if (incluir && phspVendasDAO.existeId(codigo)) {
-        Util.mensagem("Este ID já está cadastrado no sistema");
-        return;
-    }
-        
+        PhspVendasProdutosDAO phspVendasProdutosDAO = new PhspVendasProdutosDAO();
         Phspvendas phspvendas = viewBean();
+        
         if (incluir == true) {
             phspVendasDAO.insert(phspvendas);
-            
+            for (int ind = 0; ind < jTable1.getRowCount(); ind++) {
+                Phspvendasprodutos phspvendasprodutos = controllerVenProd.getBean(ind);
+                phspvendasprodutos.setPhspvendas(phspvendas);
+                phspVendasProdutosDAO.insert(phspvendasprodutos);
+            }
         } else {
             phspVendasDAO.update(phspvendas);
+
         }
-        
 
         Util.habilitar(false, jTxtCodigo, jCboClientes, jCboUsuarios, jFmtDataVenda,
                 jTxtTotal, jTxtFormaPagamento, jTxtDesconto,
@@ -438,6 +451,7 @@ public class PHSP_JDlgVendas extends javax.swing.JDialog {
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         Util.limpar(jTxtCodigo, jCboClientes, jCboUsuarios, jFmtDataVenda,
                 jTxtTotal, jTxtFormaPagamento, jTxtDesconto);
+        controllerVenProd.setList(new ArrayList());
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jCboClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCboClientesActionPerformed

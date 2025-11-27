@@ -3,6 +3,7 @@ package view;
 import bean.Phspvendas;
 import dao.PhspVendasDAO;
 import java.util.List;
+import tools.Util;
 
 /**
  *
@@ -13,7 +14,7 @@ public class PHSP_JDlgVendasPesquisar extends javax.swing.JDialog {
     /**
      * Creates new form JDlgVendasPesquisar
      */
-    private PHSP_JDlgVendas jDlgVendas;
+    private PHSP_JDlgVendas pHSP_JDlgVendas;
     PHSP_ControllerVendas controllerVendas;
     
     public PHSP_JDlgVendasPesquisar(java.awt.Frame parent, boolean modal) {
@@ -21,6 +22,7 @@ public class PHSP_JDlgVendasPesquisar extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Pesquisar Vendas");
+        
         controllerVendas = new PHSP_ControllerVendas();
         PhspVendasDAO phspVendasDAO = new PhspVendasDAO();
         List lista = (List) phspVendasDAO.listAll();
@@ -28,8 +30,8 @@ public class PHSP_JDlgVendasPesquisar extends javax.swing.JDialog {
         jTable1.setModel(controllerVendas);
     }
 
-    public void setTelaAnterior( PHSP_JDlgVendas jDlgVendas) {
-        this.jDlgVendas = jDlgVendas;
+    public void setTelaAnterior( PHSP_JDlgVendas pHSP_JDlgVendas) {
+        this.pHSP_JDlgVendas = pHSP_JDlgVendas;
     }
     
     /**
@@ -93,9 +95,15 @@ public class PHSP_JDlgVendasPesquisar extends javax.swing.JDialog {
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
         // TODO add your handling code here:
-        Phspvendas phspvendas =  controllerVendas.getBean( jTable1.getSelectedRow() );
-        jDlgVendas.beanView(phspvendas);
-        this.setVisible(false);
+        if (jTable1.getSelectedRow() == -1) {
+            Util.mensagem("Nenhum registro foi selecionada. Favor selecionar um registro.");
+        } else {
+            Phspvendas phspvendas = controllerVendas.getBean(jTable1.getSelectedRow());
+            pHSP_JDlgVendas.beanView(phspvendas);
+            this.setVisible(false);
+        }
+        
+        
     }//GEN-LAST:event_jBtnOkActionPerformed
 
     /**
