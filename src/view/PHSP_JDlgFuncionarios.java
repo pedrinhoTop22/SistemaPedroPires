@@ -283,7 +283,7 @@ public class PHSP_JDlgFuncionarios extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-        if (Util.pergunta("Deseja excluir ?") == true) {
+        if (Util.perguntar("Deseja excluir ?") == true) {
             PhspFuncionariosDAO phspFuncionariosDAO = new PhspFuncionariosDAO();
             phspFuncionariosDAO.delete(viewBean());
         }

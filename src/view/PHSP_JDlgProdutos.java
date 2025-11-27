@@ -311,7 +311,7 @@ public class PHSP_JDlgProdutos extends javax.swing.JDialog {
 
     private void jBtnExcluir13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluir13ActionPerformed
          // TODO add your handling code here:
-        if (Util.pergunta("Deseja excluir ?") == true) {
+        if (Util.perguntar("Deseja excluir ?") == true) {
             PhspProdutosDAO phspProdutosDAO = new PhspProdutosDAO();
             phspProdutosDAO.delete(viewBean());
         }

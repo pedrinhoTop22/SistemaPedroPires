@@ -308,7 +308,7 @@ public class PHSP_JDlgUsuarios extends javax.swing.JDialog {
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
       // TODO add your handling code here:
-        if (Util.pergunta("Deseja excluir ?") == true) {
+        if (Util.perguntar("Deseja excluir ?") == true) {
             PhspUsuariosDAO phspUsuariosDAO = new PhspUsuariosDAO();
             phspUsuariosDAO.delete(viewBean());
         }

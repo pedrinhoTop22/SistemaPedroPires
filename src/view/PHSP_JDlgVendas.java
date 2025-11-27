@@ -354,7 +354,7 @@ public class PHSP_JDlgVendas extends javax.swing.JDialog {
 
     private void jBtnExcluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirProdActionPerformed
         // TODO add your handling code here:
-        if (Util.pergunta("Deseja excluir o produto ?")== true) {
+        if (Util.perguntar("Deseja excluir o produto ?")== true) {
 
         }
     }//GEN-LAST:event_jBtnExcluirProdActionPerformed
@@ -392,7 +392,7 @@ public class PHSP_JDlgVendas extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-        if (Util.pergunta("Deseja excluir ?") == true) {
+        if (Util.perguntar("Deseja excluir ?") == true) {
             PhspVendasDAO phspVendasDAO = new PhspVendasDAO();
             phspVendasDAO.delete(viewBean());
         }
