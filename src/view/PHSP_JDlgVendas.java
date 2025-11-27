@@ -32,6 +32,10 @@ public class PHSP_JDlgVendas extends javax.swing.JDialog {
         setTitle("Vendas");
         setLocationRelativeTo(null);
         
+        Util.habilitar(false, jTxtCodigo, jCboClientes, jCboUsuarios, jFmtDataVenda,
+                jTxtTotal, jTxtFormaPagamento, jTxtDesconto,
+                jBtnConfirmar, jBtnCancelar, jBtnIncluirProd, jBtnAlterarProd, jBtnExcluirProd);
+        
         PhspClientesDAO phspClientesDAO = new PhspClientesDAO();
         List lista = (List) phspClientesDAO.listAll();
         for (int i = 0; i < lista.size(); i++) {
@@ -378,7 +382,7 @@ public class PHSP_JDlgVendas extends javax.swing.JDialog {
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
       Util.habilitar(false, jTxtCodigo, jCboClientes, jCboUsuarios, jFmtDataVenda,
                 jTxtTotal, jTxtFormaPagamento, jTxtDesconto,
-                jBtnConfirmar, jBtnCancelar);
+                jBtnConfirmar, jBtnCancelar, jBtnIncluirProd, jBtnAlterarProd, jBtnExcluirProd);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         Util.limpar(jTxtCodigo, jCboClientes, jCboUsuarios, jFmtDataVenda,
                 jTxtTotal, jTxtFormaPagamento, jTxtDesconto);
@@ -392,7 +396,7 @@ public class PHSP_JDlgVendas extends javax.swing.JDialog {
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
       Util.habilitar(true, jTxtCodigo, jCboClientes, jCboUsuarios, jFmtDataVenda,
-                jTxtTotal, jTxtFormaPagamento, jTxtDesconto, jBtnConfirmar, jBtnCancelar);
+                jTxtTotal, jTxtFormaPagamento, jTxtDesconto, jBtnConfirmar, jBtnCancelar, jBtnIncluirProd, jBtnAlterarProd, jBtnExcluirProd);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         Util.limpar(jTxtCodigo, jCboClientes, jCboUsuarios, jFmtDataVenda,
                 jTxtTotal, jTxtFormaPagamento, jTxtDesconto);
@@ -403,7 +407,7 @@ public class PHSP_JDlgVendas extends javax.swing.JDialog {
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         Util.habilitar(true, jCboClientes, jCboUsuarios, jFmtDataVenda,
                 jTxtTotal, jTxtFormaPagamento, jTxtDesconto,
-                jBtnConfirmar, jBtnCancelar);
+                jBtnConfirmar, jBtnCancelar, jBtnIncluirProd, jBtnAlterarProd, jBtnExcluirProd);
         Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         controllerVenProd.setList(new ArrayList());
         incluir = false;
@@ -447,7 +451,7 @@ public class PHSP_JDlgVendas extends javax.swing.JDialog {
 
         Util.habilitar(false, jTxtCodigo, jCboClientes, jCboUsuarios, jFmtDataVenda,
                 jTxtTotal, jTxtFormaPagamento, jTxtDesconto,
-                jBtnConfirmar, jBtnCancelar);
+                jBtnConfirmar, jBtnCancelar, jBtnIncluirProd, jBtnAlterarProd, jBtnExcluirProd);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
         Util.limpar(jTxtCodigo, jCboClientes, jCboUsuarios, jFmtDataVenda,
                 jTxtTotal, jTxtFormaPagamento, jTxtDesconto);
