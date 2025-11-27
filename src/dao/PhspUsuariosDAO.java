@@ -77,4 +77,16 @@ public class PhspUsuariosDAO extends AbstractDAO{
 
     return !lista.isEmpty();
     }
+    
+    public boolean validarLogin(String apelido, String senha) {
+    session.beginTransaction();
+    Criteria criteria = session.createCriteria(Phspusuarios.class);
+    criteria.add(Restrictions.eq("phspApelido", apelido));
+    criteria.add(Restrictions.eq("phspSenha", senha));
+    List lista = criteria.list();
+    session.getTransaction().commit();
+    return !lista.isEmpty();
+}
+  
+    
 }
