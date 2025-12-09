@@ -75,7 +75,7 @@ public class PhspVendasDAO extends AbstractDAO{
        public Object listIDTotal(int ID, double total) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Phspvendas.class);
-        criteria.add(Restrictions.like("phspIdVendas", "%" +ID+"%"));
+        criteria.add(Restrictions.like("phspIdVendas", ID));
         criteria.add(Restrictions.ge("phspPreco", total));
         List lista = criteria.list();
         session.getTransaction().commit();        
