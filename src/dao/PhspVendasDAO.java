@@ -53,6 +53,35 @@ public class PhspVendasDAO extends AbstractDAO{
         session.getTransaction().commit();        
         return lista;
     }
+    
+     public Object listID(int ID) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(Phspvendas.class);
+        criteria.add(Restrictions.like("phspIdVendas", ID));
+        List lista = criteria.list();
+        session.getTransaction().commit();        
+        return lista;
+    }
+     
+      public Object listTotal(double total) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(Phspvendas.class);
+        criteria.add(Restrictions.ge("phspTotal", total));
+        List lista = criteria.list();
+        session.getTransaction().commit();        
+        return lista;
+        }
+      
+       public Object listIDTotal(int ID, double total) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(Phspvendas.class);
+        criteria.add(Restrictions.like("phspIdVendas", "%" +ID+"%"));
+        criteria.add(Restrictions.ge("phspPreco", total));
+        List lista = criteria.list();
+        session.getTransaction().commit();        
+        return lista;
+    }
+     
 
     @Override
     public Object listAll() {
