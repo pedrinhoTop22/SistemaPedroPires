@@ -39,6 +39,11 @@ public class PHSP_JFrmPrincipal extends javax.swing.JFrame {
         jMenuSair = new javax.swing.JMenuItem();
         jMnuMovimentos = new javax.swing.JMenu();
         jMenuVendas = new javax.swing.JMenuItem();
+        jMnuConsultas = new javax.swing.JMenu();
+        jMnuClientes = new javax.swing.JMenuItem();
+        jMnuProdutos = new javax.swing.JMenuItem();
+        jMnuUsuarios = new javax.swing.JMenuItem();
+        jMnuVendas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -123,6 +128,42 @@ public class PHSP_JFrmPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMnuMovimentos);
 
+        jMnuConsultas.setText("Consultas");
+
+        jMnuClientes.setText("Clientes");
+        jMnuClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuClientesActionPerformed(evt);
+            }
+        });
+        jMnuConsultas.add(jMnuClientes);
+
+        jMnuProdutos.setText("Produtos");
+        jMnuProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuProdutosActionPerformed(evt);
+            }
+        });
+        jMnuConsultas.add(jMnuProdutos);
+
+        jMnuUsuarios.setText("Usuarios");
+        jMnuUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuUsuariosActionPerformed(evt);
+            }
+        });
+        jMnuConsultas.add(jMnuUsuarios);
+
+        jMnuVendas.setText("Vendas");
+        jMnuVendas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuVendasActionPerformed(evt);
+            }
+        });
+        jMnuConsultas.add(jMnuVendas);
+
+        jMenuBar1.add(jMnuConsultas);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -176,6 +217,26 @@ public class PHSP_JFrmPrincipal extends javax.swing.JFrame {
         new view.PHSP_JDlgVendas(this, true).setVisible(true);
     }//GEN-LAST:event_jMenuVendasActionPerformed
 
+    private void jMnuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuClientesActionPerformed
+        // TODO add your handling code here:
+         new view.PHSP_JDlgConsultaClientes(this, true).setVisible(true);
+    }//GEN-LAST:event_jMnuClientesActionPerformed
+
+    private void jMnuProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuProdutosActionPerformed
+        // TODO add your handling code here:
+         new view.PHSP_JDlgConsultaProdutos(this, true).setVisible(true);
+    }//GEN-LAST:event_jMnuProdutosActionPerformed
+
+    private void jMnuUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuUsuariosActionPerformed
+        // TODO add your handling code here:
+         new view.PHSP_JDlgConsultaUsuarios(this, true).setVisible(true);
+    }//GEN-LAST:event_jMnuUsuariosActionPerformed
+
+    private void jMnuVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuVendasActionPerformed
+        // TODO add your handling code here:
+         new view.PHSP_JDlgConsultaVendas(this, true).setVisible(true);
+    }//GEN-LAST:event_jMnuVendasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -227,7 +288,12 @@ public class PHSP_JFrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuUsuarios;
     private javax.swing.JMenuItem jMenuVendas;
     private javax.swing.JMenu jMnuCadastros;
+    private javax.swing.JMenuItem jMnuClientes;
+    private javax.swing.JMenu jMnuConsultas;
     private javax.swing.JMenu jMnuMovimentos;
+    private javax.swing.JMenuItem jMnuProdutos;
+    private javax.swing.JMenuItem jMnuUsuarios;
+    private javax.swing.JMenuItem jMnuVendas;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
