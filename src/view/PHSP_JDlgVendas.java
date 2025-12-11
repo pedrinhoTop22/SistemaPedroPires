@@ -54,6 +54,20 @@ public class PHSP_JDlgVendas extends javax.swing.JDialog {
       
     }
     
+    public void atualizacaoTotal() {
+        double somaTotais = 0.0;
+
+        for (int i = 0; i < jTable1.getRowCount(); i++) {
+            Object valorTotal = jTable1.getValueAt(i, 4);
+            if (valorTotal != null) {
+                somaTotais += Util.strToDouble(valorTotal.toString());
+            }
+        }
+
+        jTxtTotal.setText(Util.doubleToStr(somaTotais));
+    }
+@SuppressWarnings("unchecked")
+    
 
     public void beanView(Phspvendas phspvendas) {
         jTxtCodigo.setText(Util.intToStr(phspvendas.getPhspIdVendas()));
@@ -360,6 +374,7 @@ public class PHSP_JDlgVendas extends javax.swing.JDialog {
         PHSP_JDlgVendasProdutos jDlgVendasProdutos = new PHSP_JDlgVendasProdutos(null, true);
         jDlgVendasProdutos.setTelaAnterior(this);
         jDlgVendasProdutos.setVisible(true);
+        atualizacaoTotal();
     }//GEN-LAST:event_jBtnIncluirProdActionPerformed
 
     private void jBtnAlterarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarProdActionPerformed
@@ -377,6 +392,7 @@ public class PHSP_JDlgVendas extends javax.swing.JDialog {
                 controllerVenProd.removeBean(jTable1.getSelectedRow());
             }
         }
+        atualizacaoTotal();
     }//GEN-LAST:event_jBtnExcluirProdActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
@@ -402,6 +418,7 @@ public class PHSP_JDlgVendas extends javax.swing.JDialog {
                 jTxtTotal, jTxtFormaPagamento, jTxtDesconto);
         controllerVenProd.setList(new ArrayList());
         incluir = true;
+        atualizacaoTotal();
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed

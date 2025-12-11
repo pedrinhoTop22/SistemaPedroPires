@@ -35,7 +35,7 @@ public class PHSP_ControllerConsultasVendas extends AbstractTableModel {
         if ( columnIndex == 0 ){
             return phspvendas.getPhspIdVendas();
         } else if (columnIndex ==1) {
-            return phspvendas.getPhspclientes();        
+            return phspvendas.getPhspTotal();        
         } else if (columnIndex ==2) {
             return phspvendas.getPhspusuarios();
         }
@@ -47,7 +47,7 @@ public class PHSP_ControllerConsultasVendas extends AbstractTableModel {
         if ( columnIndex == 0) {
             return "Código";
         } else if ( columnIndex == 1) {
-            return "Clientes";         
+            return "Total";         
         } else if ( columnIndex == 2) {
             return "Usuarios";
         }

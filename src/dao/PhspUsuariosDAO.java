@@ -53,7 +53,7 @@ public class PhspUsuariosDAO extends AbstractDAO{
         session.getTransaction().commit();        
         return lista;
     }
-    
+   
     public Object listNome(String nome) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Phspusuarios.class);
@@ -63,19 +63,19 @@ public class PhspUsuariosDAO extends AbstractDAO{
         return lista;
     }
     
-    public Object listID(int ID) {
+    public Object listCPF(String CPF) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Phspusuarios.class);
-        criteria.add(Restrictions.like("phspIdUsuarios", ID));
+        criteria.add(Restrictions.like("phspCpf", CPF));
         List lista = criteria.list();
         session.getTransaction().commit();        
         return lista;
     }
     
-     public Object listIDNome(int ID, String nome) {
+     public Object listIDNome(String CPF, String nome) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(Phspusuarios.class);
-        criteria.add(Restrictions.like("phspIdUsuarios", ID));
+        criteria.add(Restrictions.like("phspCpf", CPF));
         criteria.add(Restrictions.ge("phspNome", nome));
         List lista = criteria.list();
         session.getTransaction().commit();        

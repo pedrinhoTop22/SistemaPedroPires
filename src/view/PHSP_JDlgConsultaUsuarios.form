@@ -29,6 +29,8 @@
                   <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jBtnOk1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jBtnOk" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
@@ -40,11 +42,12 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jTxtID" min="-2" pref="261" max="-2" attributes="0"/>
+                              <Component id="jTxtCPF" min="-2" pref="261" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jBtnConsultar" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -65,7 +68,7 @@
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTxtID" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTxtCPF" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jBtnConsultar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -73,7 +76,10 @@
               <EmptySpace pref="17" max="32767" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="254" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jBtnOk" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jBtnOk" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jBtnOk1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -119,11 +125,11 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jTxtNome">
     </Component>
-    <Component class="javax.swing.JTextField" name="jTxtID">
+    <Component class="javax.swing.JTextField" name="jTxtCPF">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="ID Maior que "/>
+        <Property name="text" type="java.lang.String" value="CPF"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jBtnConsultar">
@@ -132,6 +138,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnConsultarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jBtnOk1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="PDF"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnOk1ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

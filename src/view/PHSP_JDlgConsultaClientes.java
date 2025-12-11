@@ -55,6 +55,7 @@ public class PHSP_JDlgConsultaClientes extends javax.swing.JDialog {
         jTxtID = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jBtnConsultar = new javax.swing.JButton();
+        jBtnPDF = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -94,6 +95,13 @@ public class PHSP_JDlgConsultaClientes extends javax.swing.JDialog {
             }
         });
 
+        jBtnPDF.setText("PDF");
+        jBtnPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnPDFActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -104,6 +112,8 @@ public class PHSP_JDlgConsultaClientes extends javax.swing.JDialog {
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jBtnPDF)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBtnOk))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,7 +125,8 @@ public class PHSP_JDlgConsultaClientes extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTxtID, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBtnConsultar)))))
+                                .addComponent(jBtnConsultar)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -136,7 +147,9 @@ public class PHSP_JDlgConsultaClientes extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jBtnOk)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnOk)
+                    .addComponent(jBtnPDF))
                 .addContainerGap())
         );
 
@@ -171,6 +184,12 @@ public class PHSP_JDlgConsultaClientes extends javax.swing.JDialog {
         }
         controllerConsultasClientes.setList(lista);
     }//GEN-LAST:event_jBtnConsultarActionPerformed
+
+    private void jBtnPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPDFActionPerformed
+        // TODO add your handling code here:                                          
+   Util.gerarPDF(jTable1, "Relatório de Clientes");
+
+    }//GEN-LAST:event_jBtnPDFActionPerformed
 
     /**
      * @param args the command line arguments
@@ -248,6 +267,7 @@ public class PHSP_JDlgConsultaClientes extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnConsultar;
     private javax.swing.JButton jBtnOk;
+    private javax.swing.JButton jBtnPDF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
